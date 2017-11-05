@@ -21,7 +21,7 @@
                   <div>
                     <h3 class="headline mb-0" v-text="section.title"></h3>
                     <span v-text="section.content" class="grey--text"></span>
-                    <a href="section.resource"><h3 class="headline mb-0"></h3>Source</a>
+                    <a v-bind:href="section.resource"><h3 class="headline mb-0"></h3>Source</a>
                   </div>
                 </v-card-title>
                  <v-card-actions>
