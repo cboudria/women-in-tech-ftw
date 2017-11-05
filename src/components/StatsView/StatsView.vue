@@ -12,9 +12,9 @@
 </template>
 
 <script>
-// import * as firebase from 'firebase'
+import * as firebase from 'firebase'
 import _ from 'lodash'
-import StatsData from '@/components/StatsView/StatsData.js'
+// import StatsData from '@/components/StatsView/StatsData.js'
 import StatsChart from '@/components/StatsView/StatsChart.js'
 export default {
   data () {
@@ -41,15 +41,15 @@ export default {
   },
   methods: {
     getStatsData () {
-      this.formatData(StatsData)
-      // firebase.database().ref('/stats').once('value').then(
-      //   (snapshot) => {
-      //     console.log(snapshot.val())
-      //     this.formatData(snapshot.val())
-      //   }).catch((error) => {
-      //     console.log(error)
-      //     this.error = error
-      //   })
+      // this.formatData(StatsData)
+      firebase.database().ref('/stats').once('value').then(
+        (snapshot) => {
+          console.log(snapshot.val())
+          this.formatData(snapshot.val())
+        }).catch((error) => {
+          console.log(error)
+          this.error = error
+        })
     },
     formatData (data) {
       let tempData = []
@@ -67,7 +67,6 @@ export default {
         }
       }
       this.data = dataObj
-      console.log(this.data)
       this.loadChart = true
     }
   }
