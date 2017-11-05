@@ -11,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Timeline',
-      component: TimeLine
+      name: 'Spotlight',
+      component: SpotLight
     },
     {
       path: '/spotlight',
