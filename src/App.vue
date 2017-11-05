@@ -3,6 +3,7 @@
     <v-navigation-drawer
       v-model="drawer"
       enable-resize-watcher
+      persistent
       app
     >
       <v-list>
@@ -10,9 +11,10 @@
           value="false"
           v-for="(item, i) in items"
           :key="i"
+          :to="item.url"
         >
           <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
+            <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title v-text="item.title"></v-list-tile-title>
@@ -24,6 +26,17 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn
+          flat
+          v-for="(item, i) in items"
+          :key="item.title"
+          :to="item.url"        
+        >
+        <v-icon>{{ item.icon }}</v-icon>
+        {{ item.title }}
+        </v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <main>
       <v-content>
@@ -41,10 +54,28 @@
     data () {
       return {
         drawer: false,
-        items: [{
-          icon: 'bubble_chart',
-          title: 'Inspire'
-        }],
+        items: [
+          {
+            icon: 'home',
+            title: 'Home',
+            url: '/'
+          },
+          {
+            icon: 'lightbulb_outline',
+            title: 'Spotlight',
+            url: '/spotlight'
+          },
+          {
+            icon: 'timeline',
+            title: 'Timeline',
+            url: '/timeline'
+          },
+          {
+            icon: 'insert_chart',
+            title: 'Stats',
+            url: '/stats'
+          }
+        ],
         title: 'Women in Tech FTW'
       }
     }

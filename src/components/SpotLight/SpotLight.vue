@@ -3,7 +3,6 @@
     <v-flex xs12 sm12>
       <v-card>
         <v-card-actions>
-          <v-select label="Size" :items="items" v-model="size"></v-select>
           <v-spacer></v-spacer>
         </v-card-actions>
         <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
@@ -20,11 +19,10 @@
                 </v-card-media>
                 <v-card-title primary-title>
                   <div>
-                    <h3 class="headline mb-0" v-text="section.title"></h3>
+                    <router-link :to="section.url"><h3 class="headline mb-0" v-text="section.title"></h3></router-link>
                   </div>
                 </v-card-title>
                  <v-card-actions>
-                  <v-btn :to="section.url" flat color="orange">Read more</v-btn>
                 </v-card-actions>
               </v-card>
             </v-flex>
@@ -45,17 +43,10 @@ export default {
   data () {
     return {
       size: 'sm',
-      items: [
-        { text: 'Extra small (1px)', value: 'xs' },
-        { text: 'Small (4px)', value: 'sm' },
-        { text: 'Medium (8px)', value: 'md' },
-        { text: 'Large (16px)', value: 'lg' },
-        { text: 'Extra large (24px)', value: 'xl' }
-      ],
       sections: [{
         image: business,
-        title: 'Entrepeneurs',
-        url: '/spotlight/entrepeneurs',
+        title: 'Entrepreneurs',
+        url: '/spotlight/entrepreneurs',
         content: ''
       },
       {
@@ -81,7 +72,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

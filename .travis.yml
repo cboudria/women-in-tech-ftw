@@ -1,14 +1,19 @@
 # require the branch name to be master
-if: branch = master
+branches:
+  only:
+  - master
 
 language: node_js
 node_js:
-  - "6.6.0"
+  - "6"
 install:
-  - npm install -g firebase-tools
+  - npm install -g firebase-tools
 script:
-  - echo "Deploy!!"
+  - echo "Deploy!!"
   - npm install
+  - cd functions
+  - npm install
+  - cd ..
   - npm run build
 after_success:
-  - firebase deploy — project women-in-tech-ftw — token $FIREBASE_TOKEN.
+  - firebase deploy --project women-in-tech-ftw --token "$FIREBASE_TOKEN"
