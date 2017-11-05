@@ -36,5 +36,6 @@ export default new Router({
       name: 'Stats',
       component: StatsView
     }
-  ]
+  ],
+  mode: 'history'
 })
