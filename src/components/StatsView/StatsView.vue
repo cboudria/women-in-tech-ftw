@@ -30,11 +30,16 @@ export default {
       console.log('getting stats')
       firebase.database().ref('/stats').once('value').then(
         (snapshot) => {
-          this.stats = snapshot.val
-          console.log(snapshot.val())
+          this.formatData(snapshot.val())
         }).catch((error) => {
           this.error = error
         })
+    },
+    formatData (data) {
+      // let dataObj = {
+      //   labels: [],
+      //   datasets: []
+      // }
     }
   }
 }
