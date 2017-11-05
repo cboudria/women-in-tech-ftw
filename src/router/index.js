@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
 import SpotLight from '@/components/SpotLight/SpotLight'
 import SpotLightSection from '@/components/SpotLight/SpotLightSection'
 import TimeLine from '@/components/TimeLine'
@@ -12,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Timeline',
+      component: TimeLine
     },
     {
       path: '/spotlight',
