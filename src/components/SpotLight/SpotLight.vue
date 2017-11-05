@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-flex xs12 sm12>
+    <v-flex xs12 sm12 l6>
       <v-card>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -8,7 +8,7 @@
         <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
           <v-layout row wrap>
             <v-flex
-              xs6
+              xs12 sm6 md6 lg6 
               v-for="(section, s) in sections"
               :key="s"
             >
@@ -19,7 +19,9 @@
                 </v-card-media>
                 <v-card-title primary-title>
                   <div>
-                    <router-link :to="section.url"><h3 class="headline mb-0" v-text="section.title"></h3></router-link>
+                    <h3 class="headline mb-0" v-text="section.title"></h3>
+                    <span v-text="section.content" class="grey--text"></span>
+                    <a href="section.resource"><h3 class="headline mb-0"></h3>Source</a>
                   </div>
                 </v-card-title>
                  <v-card-actions>
@@ -46,22 +48,26 @@ export default {
       sections: [{
         image: business,
         title: 'Entrepreneurs',
-        url: '/spotlight/entrepreneurs'
+        resource: 'https://www.forbes.com/sites/alisoncoleman/2017/03/08/the-female-tech-entrepreneurs-taking-a-risk-and-reaping-the-rewards/#d88a73c7026d',
+        content: '"There are strong communities within technology to support, mentor, and empower women in tech, including initiatives such as Girls Who Code, The Mary Keller Network, and Femtech Global that provide access to meet ups, free courses for women, and online training."'
       },
       {
         image: repo,
         title: 'Repos',
-        url: '/spotlight/repos'
+        resource: 'https://github.com/WomenWhoCode',
+        content: 'Women Who Code is a global non-profit orginization dedicated to inspiring women to excel in technology careers.'
       },
       {
         image: school,
         title: 'Universities',
-        url: '/spotlight/universities'
+        resource: 'https://www.washingtonpost.com/local/education/women-break-barriers-in-engineering-and-computer-science-at-some-top-colleges/2016/09/16/538027a4-7503-11e6-be4f-3f42f2e5a49e_story.html?utm_term=.e2bdaed591fe',
+        content: 'Women are making major gains in enrollment in engineering and computer science at some of the nation’s most prominent colleges and universities, a breakthrough that shows that gender parity is possible in technology fields long dominated by men.'
       },
       {
         image: camp,
         title: 'Code Camps',
-        url: '/spotlight/codecamps'
+        resource: 'https://learntocodewith.me/posts/13-places-women-learn-code/',
+        content: 'Everyone always talks about the lack of women in tech—and I cant argue with the statistics. But it doesn’t have to stay that way!'
       }],
       title: 'Spotlight Home'
     }
