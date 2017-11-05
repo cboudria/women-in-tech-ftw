@@ -1,8 +1,7 @@
 <template>
   <v-layout>
-    <v-flex v-for="(section, index) in sections[this.section]" :key="index">
-      <pre>{{section}}</pre>
-      <h1> {{section.title}} </h1>
+    <v-flex v-for="section in thisSection" :key="section.title">
+      {{ section }}
     </v-flex>
   </v-layout>
 </template>
@@ -17,6 +16,11 @@ export default {
   props: [
     'section'
   ],
+  computed: {
+    thisSection () {
+      return this.sections[this.section]
+    }
+  },
   data () {
     return {
       sections: {
