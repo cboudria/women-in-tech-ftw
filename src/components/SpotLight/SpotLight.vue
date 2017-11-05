@@ -46,26 +46,22 @@ export default {
       sections: [{
         image: business,
         title: 'Entrepreneurs',
-        url: '/spotlight/entrepreneurs',
-        content: ''
+        url: '/spotlight/entrepreneurs'
       },
       {
         image: repo,
         title: 'Repos',
-        url: '/spotlight/repos',
-        content: ''
+        url: '/spotlight/repos'
       },
       {
         image: school,
         title: 'Universities',
-        url: '/spotlight/universities',
-        content: ''
+        url: '/spotlight/universities'
       },
       {
         image: camp,
         title: 'Code Camps',
-        url: '/spotlight/codecamps',
-        content: ''
+        url: '/spotlight/codecamps'
       }],
       title: 'Spotlight Home'
     }
