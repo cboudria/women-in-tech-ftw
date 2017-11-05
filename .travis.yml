@@ -1,5 +1,7 @@
 # require the branch name to be master
-if: branch = master
+branches:
+  only:
+  - master
 
 language: node_js
 node_js:
@@ -11,4 +13,4 @@ script:
   - npm install
   - npm run build
 after_success:
-  - firebase deploy --project women-in-tech-ftw --token $FIREBASE_TOKEN.
+  - firebase deploy --project women-in-tech-ftw --token "$FIREBASE_TOKEN"
