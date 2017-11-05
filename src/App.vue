@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <v-navigation-drawer
-      persistent
       v-model="drawer"
       enable-resize-watcher
       app
