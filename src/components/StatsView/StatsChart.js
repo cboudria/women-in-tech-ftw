@@ -1,10 +1,12 @@
-import { Line } from 'vue-chartjs'
+import { Line, mixins } from 'vue-chartjs'
+const { chartData } = mixins
+
 export default {
   extends: Line,
+  mixins: [chartData],
   name: 'stats-chart',
-  props: ['data'],
+  props: ['chartData'],
   mounted () {
-    console.log(this.data)
-    this.renderChart(this.data)
+    this.renderChart(this.chartData)
   }
 }

@@ -5,7 +5,7 @@
     </span>
     <v-flex xs12 v-if="loadChart">
       <stats-chart
-        :data="this.data"
+        :chart-data="this.chartData"
       ></stats-chart>
     </v-flex>
   </v-layout>
@@ -14,20 +14,12 @@
 <script>
 import * as firebase from 'firebase'
 import _ from 'lodash'
-// import StatsData from '@/components/StatsView/StatsData.js'
 import StatsChart from '@/components/StatsView/StatsChart.js'
 export default {
   data () {
     return {
       title: 'Stats',
-      data: {
-        labels: ['dummy'],
-        datasets: {
-          label: 'dummy',
-          backgroundColor: '#000000',
-          data: [0.5]
-        }
-      },
+      chartData: null,
       options: [],
       error: '',
       loadChart: false
@@ -63,10 +55,12 @@ export default {
       let dataObj = {
         labels: tempLabels,
         datasets: {
+          label: 'percent female',
+          backgroundColor: '#000000',
           data: tempData
         }
       }
-      this.data = dataObj
+      this.chartData = dataObj
       this.loadChart = true
     }
   }
