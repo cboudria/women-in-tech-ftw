@@ -3,6 +3,7 @@
     <v-navigation-drawer
       v-model="drawer"
       enable-resize-watcher
+      persistent
       app
     >
       <v-list>
