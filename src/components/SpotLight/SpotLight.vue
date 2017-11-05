@@ -1,23 +1,29 @@
 <template>
   <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex xs12 sm12>
       <v-card>
         <v-card-actions>
-          <v-select label="Size" :items="items" v-model="size"></v-select>
           <v-spacer></v-spacer>
         </v-card-actions>
         <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
           <v-layout row wrap>
             <v-flex
-              xs4
-              v-for="n in 9"
-              :key="n"
+              xs6
+              v-for="(section, s) in sections"
+              :key="s"
             >
               <v-card flat tile>
                 <v-card-media
-                  :src="'https://unsplash.it/150/300?image=${Math.floor(Math.random() * 100) + 1}'"
+                  :src="section.image"
                   height="150px">
                 </v-card-media>
+                <v-card-title primary-title>
+                  <div>
+                    <router-link :to="section.url"><h3 class="headline mb-0" v-text="section.title"></h3></router-link>
+                  </div>
+                </v-card-title>
+                 <v-card-actions>
+                </v-card-actions>
               </v-card>
             </v-flex>
           </v-layout>
@@ -28,39 +34,41 @@
 </template>
 
 <script>
+import business from '@/assets/business.jpg'
+import repo from '@/assets/repo.jpg'
+import school from '@/assets/school.png'
+import camp from '@/assets/camp.jpg'
+
 export default {
   data () {
-      return {
-        items: [{
-          image: '',
-          title: 'Entrepeneurs',
-          url: '/spotlight/entrepeneurs',
-          content: ''
-        },
-        {
-          image: '',
-          title: 'Repos',
-          url: '/spotlight/repos',
-          content: ''
-        },
-        {
-          image: '',
-          title: 'Universities',
-          url: '/spotlight/universities',
-          content: ''
-        },
-        {
-          image: '',
-          title: 'Code Camps',
-          url: '/spotlight/codecamps',
-          content: ''
-        }],
-        title: 'Spotlight Home'
-      }
+    return {
+      size: 'sm',
+      sections: [{
+        image: business,
+        title: 'Entrepreneurs',
+        url: '/spotlight/entrepreneurs',
+        content: ''
+      },
+      {
+        image: repo,
+        title: 'Repos',
+        url: '/spotlight/repos',
+        content: ''
+      },
+      {
+        image: school,
+        title: 'Universities',
+        url: '/spotlight/universities',
+        content: ''
+      },
+      {
+        image: camp,
+        title: 'Code Camps',
+        url: '/spotlight/codecamps',
+        content: ''
+      }],
+      title: 'Spotlight Home'
     }
+  }
 }
 </script>
-
-<style>
-
-</style>
