@@ -4,7 +4,7 @@ import Hello from '@/components/Hello'
 import SpotLight from '@/components/SpotLight/SpotLight'
 import SpotLightSection from '@/components/SpotLight/SpotLightSection'
 import TimeLine from '@/components/TimeLine'
-import StatsView from '@/components/StatsView'
+import StatsView from '@/components/StatsView/StatsView'
 
 Vue.use(Router)
 
