@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import SpotLight from '@/components/SpotLight/SpotLight'
 import SpotLightSection from '@/components/SpotLight/SpotLightSection'
 import TimeLine from '@/components/TimeLine'
+import StatsView from '@/components/StatsView'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/timeline',
       name: 'Timeline',
       component: TimeLine
+    },
+    {
+      path: '/stats',
+      name: 'Stats',
+      component: StatsView
     }
   ]
 })

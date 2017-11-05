@@ -5,11 +5,13 @@ import Vue from 'vue'
 
 import Vuetify from 'vuetify'
 import './stylus/main.styl'
+import VueCharts from 'hchs-vue-charts'
 
 import App from './App'
 import router from './router'
 
 Vue.use(Vuetify)
+Vue.use(VueCharts)
 
 Vue.config.productionTip = false
 
