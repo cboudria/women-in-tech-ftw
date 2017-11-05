@@ -6,7 +6,11 @@
 
 <script>
 export default {
-
+  name: 'StatsView',
+  data () {
+    return {
+    }
+  }
 }
 </script>
 
