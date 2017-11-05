@@ -68,6 +68,11 @@
             icon: 'timeline',
             title: 'Timeline',
             url: '/timeline'
+          },
+          {
+            icon: 'insert_chart',
+            title: 'Stats',
+            url: '/stats'
           }
         ],
         title: 'Women in Tech FTW'
