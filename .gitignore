@@ -4,6 +4,10 @@ dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+firebase-debug.log
+npm-debug.log
+/coverage
+package-lock.json
 
 # Editor directories and files
 .idea
@@ -12,3 +16,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.swp
+*.iml
+/.vscode
