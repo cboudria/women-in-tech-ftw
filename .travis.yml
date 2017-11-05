@@ -11,6 +11,9 @@ install:
 script:
   - echo "Deploy!!"
   - npm install
+  - cd functions
+  - npm install
+  - cd ..
   - npm run build
 after_success:
   - firebase deploy --project women-in-tech-ftw --token "$FIREBASE_TOKEN"
