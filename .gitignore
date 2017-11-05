@@ -8,6 +8,7 @@ firebase-debug.log
 npm-debug.log
 /coverage
 package-lock.json
+.firebase-config.js
 
 # Editor directories and files
 .idea
