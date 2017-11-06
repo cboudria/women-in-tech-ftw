@@ -16,20 +16,18 @@ import * as firebase from 'firebase'
 import _ from 'lodash'
 import StatsChart from '@/components/StatsView/StatsChart.js'
 export default {
+  components: {
+    StatsChart
+  },
   data () {
     return {
-      title: 'Stats',
       chartData: null,
-      options: [],
       error: '',
       loadChart: false
     }
   },
   mounted () {
     this.getStatsData()
-  },
-  components: {
-    StatsChart
   },
   methods: {
     getStatsData () {
@@ -54,11 +52,13 @@ export default {
       })
       let dataObj = {
         labels: tempLabels,
-        datasets: {
-          label: 'percent female',
-          backgroundColor: '#000000',
-          data: tempData
-        }
+        datasets: [
+          {
+            label: 'percent female',
+            backgroundColor: '#000000',
+            data: tempData
+          }
+        ]
       }
       this.chartData = dataObj
       this.loadChart = true
