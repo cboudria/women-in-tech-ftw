@@ -3,10 +3,11 @@
     <span v-if="error != ''">
       <pre>{{ error }}</pre>
     </span>
-    <v-flex xs12 v-if="loadChart">
-      <stats-chart
-        :chart-data="this.chartData"
-      ></stats-chart>
+    <v-flex xs12>
+      <vue-chart
+        :data="chartData"
+      >
+      </vue-chart>
     </v-flex>
   </v-layout>
 </template>
@@ -14,14 +15,30 @@
 <script>
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import StatsChart from '@/components/StatsView/StatsChart.js'
+import VueChart from 'vue-chart'
+
 export default {
+  name: 'StatsView',
   components: {
-    StatsChart
+    VueChart
   },
   data () {
     return {
-      chartData: null,
+      chartData: {
+        labels: [13, 14],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: '#f87979',
+            data: [43, 98]
+          },
+          {
+            label: 'Data Two',
+            backgroundColor: '#7979f8',
+            data: [24, 86]
+          }
+        ]
+      },
       error: '',
       loadChart: false
     }
@@ -31,7 +48,6 @@ export default {
   },
   methods: {
     getStatsData () {
-      // this.formatData(StatsData)
       firebase.database().ref('/stats').once('value').then(
         (snapshot) => {
           console.log(snapshot.val())
@@ -43,21 +59,29 @@ export default {
     },
     formatData (data) {
       let tempData = []
-      let tempLabels = []
       _.forEach(data, (val) => {
         if (val.company !== 'company') {
-          tempData.push(parseInt(val['percent_female_eng']))
-          tempLabels.push(val.company)
+          tempData[val.company] = parseInt(val['percent_female_eng'])
         }
       })
       let dataObj = {
-        labels: tempLabels,
+        labels: _.keys(tempData),
         datasets: [
           {
-            label: 'percent female',
-            backgroundColor: '#000000',
-            data: tempData
+            label: 'Percent Female Engineers',
+            backgroundColor: '#33dd89',
+            data: _.values(tempData)
           }
+          // {
+          //   label: 'Num Female Engineers',
+          //   backgroundColor: '#8933dd',
+          //   data: numFemale
+          // },
+          // {
+          //   label: 'Num Total Engineers',
+          //   backgroundColor: '#dd8933',
+          //   data: numTotal
+          // }
         ]
       }
       this.chartData = dataObj
