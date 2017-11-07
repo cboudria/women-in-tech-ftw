@@ -1,15 +1,81 @@
 <template>
-  <v-layout>
-    <span v-if="error != ''">
-      <pre>{{ error }}</pre>
-    </span>
-    <v-flex xs12>
-      <vue-chart
-        :data="chartData"
+  <v-tabs
+    dark
+    color="accent"
+  >
+    <v-tabs-bar>
+      <v-tabs-item
+        href="#chart"
       >
-      </vue-chart>
-    </v-flex>
-  </v-layout>
+        <v-icon dark>show_chart</v-icon>
+        Chart
+      </v-tabs-item>
+      <v-tabs-item
+        href="#cards"
+        icon
+      >
+        <v-icon>view_list</v-icon>
+        List
+      </v-tabs-item>
+    </v-tabs-bar>
+    <v-tabs-items>
+      <v-tabs-content
+        key="1"
+        id="chart"
+      >
+        <v-layout>
+          <v-flex>
+            <v-flex xs12>
+              <span v-if="error != ''">
+                <pre>{{ error }}</pre>
+              </span>
+              <vue-chart
+                :data="chartData"
+              >
+              </vue-chart>
+            </v-flex>
+          </v-flex>
+        </v-layout>
+      </v-tabs-content>
+      <v-tabs-content
+        key="2"
+        id="cards"
+      >
+      <v-container
+        fluid
+        grid-list-lg
+      >
+        <v-layout
+          row
+          wrap
+        >
+          <v-flex
+            v-for="(company, index) in sortedDataSet"
+            :key="company.key"
+            xs12
+            sm6
+            md2
+            v-if="company.numEng > 2"
+          >
+            <v-card
+            flat
+            >
+              <v-card-title>
+                <h6>{{ company.company }}</h6>
+              </v-card-title>
+              <v-card-text>
+
+                <strong>Percent Female:</strong> {{ company.percentFemaleEng }}<br>
+                <em>Number Female: {{ company.numFemaleEng }}</em><br>
+                <em>Total Engineers: {{ company.numEng }}</em>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+      </v-tabs-content>
+    </v-tabs-items>
+  </v-tabs>
 </template>
 
 <script>
@@ -24,23 +90,54 @@ export default {
   },
   data () {
     return {
-      chartData: {
-        labels: [13, 14],
+      dataSet: [
+        {
+          company: 'x',
+          percentFemaleEng: 30
+        },
+        {
+          company: 'y',
+          percentFemaleEng: 43
+        }
+      ],
+      error: '',
+      loadChart: false,
+      showChart: false
+    }
+  },
+  computed: {
+    chartData () {
+      return {
+        labels: this.sortedLabels,
         datasets: [
           {
-            label: 'Data One',
+            label: 'Percent Female Engineer',
             backgroundColor: '#f87979',
-            data: [43, 98]
-          },
-          {
-            label: 'Data Two',
-            backgroundColor: '#7979f8',
-            data: [24, 86]
+            data: this.sortedValues
           }
         ]
-      },
-      error: '',
-      loadChart: false
+      }
+    },
+    sortedDataSet () {
+      return _.reverse(
+        _.sortBy(this.dataSet, [(o) => {
+          return o.percentFemaleEng
+        }])
+      )
+    },
+    sortedLabels () {
+      let tempArray = []
+      _.forEach(this.sortedDataSet, (value, key) => {
+        tempArray.push(value['company'])
+      })
+      return tempArray
+    },
+    sortedValues () {
+      let tempArray = []
+      _.forEach(this.sortedDataSet, (value, key) => {
+        tempArray.push(value['percentFemaleEng'])
+      })
+      return tempArray
     }
   },
   mounted () {
@@ -53,7 +150,6 @@ export default {
           console.log(snapshot.val())
           this.formatData(snapshot.val())
         }).catch((error) => {
-          console.log(error)
           this.error = error
         })
     },
@@ -61,30 +157,18 @@ export default {
       let tempData = []
       _.forEach(data, (val) => {
         if (val.company !== 'company') {
-          tempData[val.company] = parseInt(val['percent_female_eng'])
+          tempData.push({
+            company: val.company,
+            percentFemaleEng: parseInt(val['percent_female_eng']),
+            numEng: parseInt(val['num_eng']),
+            numFemaleEng: parseInt(val['num_female_eng']),
+            key: val['key'],
+            team: val['team']
+          })
         }
       })
-      let dataObj = {
-        labels: _.keys(tempData),
-        datasets: [
-          {
-            label: 'Percent Female Engineers',
-            backgroundColor: '#33dd89',
-            data: _.values(tempData)
-          }
-          // {
-          //   label: 'Num Female Engineers',
-          //   backgroundColor: '#8933dd',
-          //   data: numFemale
-          // },
-          // {
-          //   label: 'Num Total Engineers',
-          //   backgroundColor: '#dd8933',
-          //   data: numTotal
-          // }
-        ]
-      }
-      this.chartData = dataObj
+
+      this.dataSet = tempData
       this.loadChart = true
     }
   }

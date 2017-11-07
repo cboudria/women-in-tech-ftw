@@ -31,7 +31,7 @@
           flat
           v-for="(item, i) in items"
           :key="item.title"
-          :to="item.url"        
+          :to="item.url"
         >
         <v-icon>{{ item.icon }}</v-icon>
         {{ item.title }}
@@ -82,3 +82,7 @@
   }
 
 </script>
+
+<style lang="stylus">
+  @require './stylus/main'
+</style>
