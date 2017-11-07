@@ -14,11 +14,11 @@ export default new Router({
       name: 'Spotlight',
       component: SpotLight
     },
-    {
-      path: '/spotlight',
-      name: 'Spotlight',
-      component: SpotLight
-    },
+    // {
+    //   path: '/spotlight',
+    //   name: 'Spotlight',
+    //   component: SpotLight
+    // },
     {
       path: '/spotlight/:section',
       name: 'Spotlight Section',
