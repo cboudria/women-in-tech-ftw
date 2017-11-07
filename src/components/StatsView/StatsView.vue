@@ -1,7 +1,8 @@
 <template>
   <v-tabs
     dark
-    color="accent"
+    grow
+    icons
   >
     <v-tabs-bar>
       <v-tabs-item
@@ -41,38 +42,17 @@
         key="2"
         id="cards"
       >
-      <v-container
-        fluid
-        grid-list-lg
-      >
-        <v-layout
-          row
-          wrap
+        <v-data-table
+          :headers="headers"
+          :items="dataSet"
         >
-          <v-flex
-            v-for="(company, index) in sortedDataSet"
-            :key="company.key"
-            xs12
-            sm6
-            md2
-            v-if="company.numEng > 2"
-          >
-            <v-card
-            flat
-            >
-              <v-card-title>
-                <h6>{{ company.company }}</h6>
-              </v-card-title>
-              <v-card-text>
-
-                <strong>Percent Female:</strong> {{ company.percentFemaleEng }}<br>
-                <em>Number Female: {{ company.numFemaleEng }}</em><br>
-                <em>Total Engineers: {{ company.numEng }}</em>
-              </v-card-text>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
+          <template slot="items" scope="props">
+              <td>{{ props.item.company }}</td>
+              <td>{{ props.item.numEng }}</td>
+              <td>{{ props.item.numFemaleEng }}</td>
+              <td>{{ props.item.percentFemaleEng }}</td>
+          </template>
+        </v-data-table>
       </v-tabs-content>
     </v-tabs-items>
   </v-tabs>
@@ -93,16 +73,40 @@ export default {
       dataSet: [
         {
           company: 'x',
-          percentFemaleEng: 30
+          percentFemaleEng: 30,
+          numEng: 25,
+          numFemaleEng: 30
         },
         {
           company: 'y',
-          percentFemaleEng: 43
+          percentFemaleEng: 43,
+          numEng: 25,
+          numFemaleEng: 30
         }
       ],
       error: '',
       loadChart: false,
-      showChart: false
+      showChart: false,
+      headers: [
+        {
+          text: 'Company',
+          align: 'left',
+          sortable: true,
+          value: 'company'
+        },
+        {
+          text: '# Engineers',
+          value: 'numEng'
+        },
+        {
+          text: '# Female Engineers',
+          value: 'numFemaleEng'
+        },
+        {
+          text: '% Female Engineers',
+          value: 'percentFemaleEng'
+        }
+      ]
     }
   },
   computed: {
