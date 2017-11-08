@@ -6,22 +6,38 @@
   >
     <v-tabs-bar>
       <v-tabs-item
-        href="#chart"
-      >
-        <v-icon dark>show_chart</v-icon>
-        Chart
-      </v-tabs-item>
-      <v-tabs-item
         href="#cards"
         icon
       >
         <v-icon>view_list</v-icon>
         List
       </v-tabs-item>
+      <v-tabs-item
+        href="#chart"
+      >
+        <v-icon dark>show_chart</v-icon>
+        Chart
+      </v-tabs-item>
     </v-tabs-bar>
     <v-tabs-items>
       <v-tabs-content
         key="1"
+        id="cards"
+      >
+        <v-data-table
+          :headers="headers"
+          :items="dataSet"
+        >
+          <template slot="items" slot-scope="props">
+              <td>{{ props.item.company }}</td>
+              <td class="text-xs-right">{{ props.item.numEng }}</td>
+              <td class="text-xs-right">{{ props.item.numFemaleEng }}</td>
+              <td class="text-xs-right">{{ props.item.percentFemaleEng }}</td>
+          </template>
+        </v-data-table>
+      </v-tabs-content>
+      <v-tabs-content
+        key="2"
         id="chart"
       >
         <v-layout>
@@ -37,22 +53,6 @@
             </v-flex>
           </v-flex>
         </v-layout>
-      </v-tabs-content>
-      <v-tabs-content
-        key="2"
-        id="cards"
-      >
-        <v-data-table
-          :headers="headers"
-          :items="dataSet"
-        >
-          <template slot="items" scope="props">
-              <td>{{ props.item.company }}</td>
-              <td>{{ props.item.numEng }}</td>
-              <td>{{ props.item.numFemaleEng }}</td>
-              <td>{{ props.item.percentFemaleEng }}</td>
-          </template>
-        </v-data-table>
       </v-tabs-content>
     </v-tabs-items>
   </v-tabs>

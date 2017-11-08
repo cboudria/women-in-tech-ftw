@@ -2,8 +2,7 @@
   <v-app>
     <v-navigation-drawer
       v-model="drawer"
-      enable-resize-watcher
-      persistent
+      temporary
       app
     >
       <v-list>
@@ -22,8 +21,11 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    <v-toolbar app >
+      <v-toolbar-side-icon
+        @click.native.stop="drawer = !drawer"
+        class="hidden-md-and-up"
+      ></v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
@@ -32,6 +34,7 @@
           v-for="(item, i) in items"
           :key="item.title"
           :to="item.url"
+          exact
         >
         <v-icon>{{ item.icon }}</v-icon>
         {{ item.title }}
@@ -82,7 +85,3 @@
   }
 
 </script>
-
-<style lang="stylus">
-  @require './stylus/main'
-</style>
