@@ -163,14 +163,16 @@ export default {
         if (val.company !== 'company') {
           tempData.push({
             company: val.company,
-            percentFemaleEng: parseInt(val['percent_female_eng']),
             numEng: parseInt(val['num_eng']),
             numFemaleEng: parseInt(val['num_female_eng']),
+            percentFemaleEng: parseFloat((parseInt(val['num_female_eng']) / parseInt(val['num_eng'])) * 100).toFixed(2),
             key: val['key'],
             team: val['team']
           })
         }
       })
+
+      console.log(tempData, 'tempdata')
 
       this.dataSet = tempData
       this.loadChart = true
