@@ -43,7 +43,9 @@
     </v-toolbar>
     <main>
       <v-content>
-        <router-view></router-view>
+        <v-slide-y-transition mode="out-in">
+          <router-view></router-view>
+        </v-slide-y-transition>
       </v-content>
     </main>
     <v-footer fixed app>
@@ -77,6 +79,11 @@
             icon: 'insert_chart',
             title: 'Stats',
             url: '/stats'
+          },
+          {
+            icon: 'face',
+            title: 'Auth',
+            url: '/auth'
           }
         ],
         title: 'Women in Tech FTW'
