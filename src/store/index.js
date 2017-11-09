@@ -9,7 +9,10 @@ export const store = new Vuex.Store({
   state: {
     user: null,
     error: null,
-    loading: null
+    loading: null,
+    authProviders: {
+      'google': new firebase.auth.GoogleAuthProvider()
+    }
   },
   mutations: {
     setUser (state, payload) {
@@ -20,11 +23,14 @@ export const store = new Vuex.Store({
     },
     setLoading (state, payload) {
       state.loading = payload
+    },
+    clearError (state) {
+      state.error = null
     }
   },
   actions: {
     clearError ({commit}) {
-      commit('clearError')
+      commit('setError', null)
     },
     logout ({commit}) {
       firebase.auth().signOut()
