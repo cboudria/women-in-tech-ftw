@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
     error: null,
     loading: null,
     authProviders: {
-      'google': new firebase.auth.GoogleAuthProvider()
+      'google': new firebase.auth.GoogleAuthProvider(),
+      'github': new firebase.auth.GithubAuthProvider()
     }
   },
   mutations: {
@@ -35,7 +36,6 @@ export const store = new Vuex.Store({
     logout ({commit}) {
       firebase.auth().signOut()
       commit('setUser', null)
-      commit('setUserIsAdmin', false)
     },
     signUserUp ({commit}, payload) {
       commit('setLoading', true)
