@@ -2,8 +2,7 @@
   <v-app>
     <v-navigation-drawer
       v-model="drawer"
-      enable-resize-watcher
-      persistent
+      temporary
       app
     >
       <v-list>
@@ -22,8 +21,11 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    <v-toolbar app >
+      <v-toolbar-side-icon
+        @click.native.stop="drawer = !drawer"
+        class="hidden-md-and-up"
+      ></v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
@@ -31,7 +33,8 @@
           flat
           v-for="(item, i) in items"
           :key="item.title"
-          :to="item.url"        
+          :to="item.url"
+          exact
         >
         <v-icon>{{ item.icon }}</v-icon>
         {{ item.title }}
@@ -40,7 +43,9 @@
     </v-toolbar>
     <main>
       <v-content>
-        <router-view></router-view>
+        <v-slide-y-transition mode="out-in">
+          <router-view></router-view>
+        </v-slide-y-transition>
       </v-content>
     </main>
     <v-footer fixed app>
@@ -74,6 +79,11 @@
             icon: 'insert_chart',
             title: 'Stats',
             url: '/stats'
+          },
+          {
+            icon: 'face',
+            title: 'Auth',
+            url: '/auth'
           }
         ],
         title: 'Women in Tech FTW'
