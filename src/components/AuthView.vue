@@ -10,17 +10,17 @@
       <v-flex
       md4
       >
-        <v-card>
-          <v-alert
-            v-if="error"
-            color="error"
-            dismissible
-            @input="clearError"
-            :value="error !== null"
-          >
-            {{ error.message }}
-          </v-alert>
-          <v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
+        <v-alert
+          v-if="error"
+          color="error"
+          dismissible
+          @input="clearError"
+          :value="error !== null"
+        >
+          {{ error.message }}
+        </v-alert>
+        <v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
+        <v-card v-if="!user">
           <v-card-title>
             <h5>Authorize Yourself <span class="subheading">Login/Signup</span></h5>
           </v-card-title>
@@ -66,6 +66,20 @@
             </v-layout>
           </v-card-actions>
         </v-card>
+        <v-card v-if="user">
+          <v-card-title>
+            <h4>Hi {{ user.displayName }}!</h4>
+          </v-card-title>
+          <v-card-text>
+            Not you? Sign out below.
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              block
+              @click="signOut"
+            >Sign Out</v-btn>
+          </v-card-actions>
+        </v-card>
       </v-flex>
     </v-layout>
   </v-container>
@@ -109,6 +123,9 @@ export default {
     },
     signInWithProvider (val) {
       this.$store.dispatch('signUserInWithProvider', {provider: val})
+    },
+    signOut () {
+      this.$store.dispatch('logout')
     },
     capitalize (str) {
       return _.capitalize(str)

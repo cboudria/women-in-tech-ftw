@@ -44,9 +44,7 @@ export const store = new Vuex.Store({
         .then(
           user => {
             commit('setLoading', false)
-            const newUser = {
-              id: user.uid
-            }
+            const newUser = {...user.user}
             commit('setUser', newUser)
           }
         )
@@ -64,9 +62,7 @@ export const store = new Vuex.Store({
         .then(
           user => {
             commit('setLoading', false)
-            const newUser = {
-              id: user.uid
-            }
+            const newUser = {...user.user}
             commit('setUser', newUser)
           }
         )
@@ -84,9 +80,7 @@ export const store = new Vuex.Store({
         .then(
           user => {
             commit('setLoading', false)
-            const newUser = {
-              id: user.uid
-            }
+            const newUser = {...user.user}
             commit('setUser', newUser)
           }
         )
