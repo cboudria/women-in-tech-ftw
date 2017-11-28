@@ -16,10 +16,6 @@
 </template>
 
 <script>
-import business from '@/assets/business.jpg'
-import repo from '@/assets/repo.jpg'
-import school from '@/assets/school.png'
-import camp from '@/assets/camp.jpg'
 
 export default {
   props: [
@@ -27,37 +23,12 @@ export default {
   ],
   computed: {
     thisSection () {
-      return this.sections[this.section]
+      return this.$store.getters('spotlightStore/' + [this.section])
     }
   },
   data () {
     return {
-      sections: {
-        'entrepreneurs': {
-          image: business,
-          title: 'Entrepreneurs',
-          url: '/spotlight/entrepreneurs',
-          content: ''
-        },
-        'repos': {
-          image: repo,
-          title: 'Repos',
-          url: '/spotlight/repos',
-          content: ''
-        },
-        'universities': {
-          image: school,
-          title: 'Universities',
-          url: '/spotlight/universities',
-          content: ''
-        },
-        'codecamps': {
-          image: camp,
-          title: 'Code Camps',
-          url: '/spotlight/codecamps',
-          content: ''
-        }
-      }
+
     }
   }
 }

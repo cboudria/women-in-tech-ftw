@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
+import spotlightStore from '@/store/spotlight'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
+  modules: { spotlightStore },
   state: {
     user: null,
     error: null,
