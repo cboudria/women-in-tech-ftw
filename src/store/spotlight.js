@@ -10,25 +10,25 @@ const spotlightStore = {
       image: business,
       title: 'Entrepreneurs',
       url: '/spotlight/entrepreneurs',
-      content: ''
+      content: [{ title: 'test', description: 'I am testing', url: '/spotlight' }]
     },
     repos: {
       image: repo,
       title: 'Repos',
       url: '/spotlight/repos',
-      content: ''
+      content: [{ title: 'test', description: 'I am testing', url: '/spotlight' }]
     },
     universities: {
       image: school,
       title: 'Universities',
       url: '/spotlight/universities',
-      content: ''
+      content: [{ title: 'test', description: 'I am testing', url: '/spotlight' }]
     },
     codecamps: {
       image: camp,
       title: 'Code Camps',
       url: '/spotlight/codecamps',
-      content: ''
+      content: [{ title: 'test', description: 'I am testing', url: '/spotlight' }]
     }
   },
   actions: {},
