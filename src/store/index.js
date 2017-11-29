@@ -1,17 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
-// import _ from 'lodash'
+import spotlightStore from '@/store/spotlight'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
+  modules: { spotlightStore },
   state: {
     user: null,
     error: null,
     loading: null,
     authProviders: {
-      'google': new firebase.auth.GoogleAuthProvider()
+      google: new firebase.auth.GoogleAuthProvider(),
+      github: new firebase.auth.GithubAuthProvider()
     }
   },
   mutations: {
@@ -29,73 +31,60 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
-    clearError ({commit}) {
+    clearError ({ commit }) {
       commit('setError', null)
     },
-    logout ({commit}) {
+    logout ({ commit }) {
       firebase.auth().signOut()
       commit('setUser', null)
-      commit('setUserIsAdmin', false)
     },
-    signUserUp ({commit}, payload) {
+    signUserUp ({ commit }, payload) {
       commit('setLoading', true)
       commit('clearError')
-      firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-        .then(
-          user => {
-            commit('setLoading', false)
-            const newUser = {
-              id: user.uid
-            }
-            commit('setUser', newUser)
-          }
-        )
-        .catch(
-          error => {
-            commit('setLoading', false)
-            commit('setError', error)
-          }
-        )
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(payload.email, payload.password)
+        .then(user => {
+          commit('setLoading', false)
+          const newUser = { ...user.user }
+          commit('setUser', newUser)
+        })
+        .catch(error => {
+          commit('setLoading', false)
+          commit('setError', error)
+        })
     },
-    signUserIn ({commit}, payload) {
+    signUserIn ({ commit }, payload) {
       commit('setLoading', true)
       commit('clearError')
-      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-        .then(
-          user => {
-            commit('setLoading', false)
-            const newUser = {
-              id: user.uid
-            }
-            commit('setUser', newUser)
-          }
-        )
-        .catch(
-          error => {
-            commit('setLoading', false)
-            commit('setError', error)
-          }
-        )
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(payload.email, payload.password)
+        .then(user => {
+          commit('setLoading', false)
+          const newUser = { ...user.user }
+          commit('setUser', newUser)
+        })
+        .catch(error => {
+          commit('setLoading', false)
+          commit('setError', error)
+        })
     },
-    signUserInWithProvider ({commit}, payload) {
+    signUserInWithProvider ({ commit }, payload) {
       commit('setLoading', true)
       commit('clearError')
-      firebase.auth().signInWithPopup(this.state.authProviders[payload.provider])
-        .then(
-          user => {
-            commit('setLoading', false)
-            const newUser = {
-              id: user.uid
-            }
-            commit('setUser', newUser)
-          }
-        )
-        .catch(
-          error => {
-            commit('setLoading', false)
-            commit('setError', error)
-          }
-        )
+      firebase
+        .auth()
+        .signInWithPopup(this.state.authProviders[payload.provider])
+        .then(user => {
+          commit('setLoading', false)
+          const newUser = { ...user.user }
+          commit('setUser', newUser)
+        })
+        .catch(error => {
+          commit('setLoading', false)
+          commit('setError', error)
+        })
     }
   },
   getters: {
