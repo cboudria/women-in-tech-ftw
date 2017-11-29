@@ -10,13 +10,21 @@ const spotlightStore = {
       image: business,
       title: 'Entrepreneurs',
       url: '/spotlight/entrepreneurs',
-      content: [{ title: 'test', description: 'I am testing', url: '/spotlight' }]
+      content: [
+        { title: 'Entrepreneur Person', description: 'Description about entrepreneus person!', url: '/spotlight' }
+      ]
     },
     repos: {
       image: repo,
       title: 'Repos',
       url: '/spotlight/repos',
-      content: [{ title: 'test', description: 'I am testing', url: '/spotlight' }]
+      content: [
+        {
+          title: 'Women in Tech',
+          description: 'This site is hosted on Github, contribute with us!',
+          url: 'https://github.com/cboudria/women-in-tech-ftw'
+        }
+      ]
     },
     universities: {
       image: school,

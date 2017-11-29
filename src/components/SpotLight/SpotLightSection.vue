@@ -28,18 +28,25 @@
     >
       <v-card>
         <v-card-title>
-          {{ content.title }}
+          <h6>
+            {{ content.title }}
+          </h6>
         </v-card-title>
         <v-card-text>
           {{ content.description }}
+
+          {{ content.url }}
         </v-card-text>
         <v-card-actions
           v-if="content.url"
         >
           <v-btn
-            :to="content.url"
+            :href="content.url"
+            exact
+            color="secondary"
+            block
           >
-            Go
+            go
           </v-btn>
         </v-card-actions>
       </v-card>
