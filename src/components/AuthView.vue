@@ -94,10 +94,7 @@ export default {
     return {
       email: '',
       password: '',
-      providers: [
-        'google',
-        'github'
-      ]
+      providers: ['google', 'github']
     }
   },
   computed: {
@@ -111,7 +108,7 @@ export default {
       return this.$store.getters.user
     },
     creds () {
-      return {email: this.email, password: this.password}
+      return { email: this.email, password: this.password }
     }
   },
   methods: {
@@ -122,7 +119,7 @@ export default {
       this.$store.dispatch('signUserIn', this.creds)
     },
     signInWithProvider (val) {
-      this.$store.dispatch('signUserInWithProvider', {provider: val})
+      this.$store.dispatch('signUserInWithProvider', { provider: val })
     },
     signOut () {
       this.$store.dispatch('logout')

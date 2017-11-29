@@ -1,16 +1,61 @@
 <template>
-  <v-layout>
-    <v-flex v-for="section in thisSection" :key="section.title">
-      {{ section }}
+<v-container grid-list-lg>
+  <v-card
+    flat
+    tile
+  >
+    <v-card-media
+      :src="thisSection.image"
+      height="200"
+    >
+    </v-card-media>
+    <v-card-title>
+      <h2>
+        {{ thisSection.title }}
+      </h2>
+    </v-card-title>
+  </v-card>
+  <v-layout
+    row
+    wrap
+  >
+    <v-flex
+      v-for="(content, index) in thisSection.content"
+      :key="thisSection.title + index"
+      lg3
+      md6
+      sm12
+    >
+      <v-card>
+        <v-card-title>
+          <h6>
+            {{ content.title }}
+          </h6>
+        </v-card-title>
+        <v-card-text>
+          {{ content.description }}
+
+          {{ content.url }}
+        </v-card-text>
+        <v-card-actions
+          v-if="content.url"
+        >
+          <v-btn
+            :href="content.url"
+            exact
+            color="secondary"
+            block
+          >
+            go
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-flex>
   </v-layout>
+</v-container>
 </template>
 
 <script>
-import business from '@/assets/business.jpg'
-import repo from '@/assets/repo.jpg'
-import school from '@/assets/school.png'
-import camp from '@/assets/camp.jpg'
 
 export default {
   props: [
@@ -18,37 +63,12 @@ export default {
   ],
   computed: {
     thisSection () {
-      return this.sections[this.section]
+      return this.$store.getters['spotlightStore/' + this.section]
     }
   },
   data () {
     return {
-      sections: {
-        'entrepreneurs': {
-          image: business,
-          title: 'Entrepreneurs',
-          url: '/spotlight/entrepreneurs',
-          content: ''
-        },
-        'repos': {
-          image: repo,
-          title: 'Repos',
-          url: '/spotlight/repos',
-          content: ''
-        },
-        'universities': {
-          image: school,
-          title: 'Universities',
-          url: '/spotlight/universities',
-          content: ''
-        },
-        'codecamps': {
-          image: camp,
-          title: 'Code Camps',
-          url: '/spotlight/codecamps',
-          content: ''
-        }
-      }
+
     }
   }
 }
