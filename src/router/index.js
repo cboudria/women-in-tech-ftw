@@ -5,6 +5,7 @@ import SpotLightSection from '@/components/SpotLight/SpotLightSection'
 import TimeLine from '@/components/TimeLine'
 import AuthView from '@/components/AuthView'
 import StatsView from '@/components/StatsView/StatsView'
+import Hello from '@/components/Hello'
 
 Vue.use(Router)
 
@@ -14,6 +15,11 @@ export default new Router({
       path: '/',
       name: 'Spotlight',
       component: SpotLight
+    },
+    {
+      path: '/Spotlight',
+      name: 'Hello',
+      component: Hello
     },
     {
       path: '/spotlight/:section',
